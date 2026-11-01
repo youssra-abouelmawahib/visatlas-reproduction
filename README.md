@@ -1,15 +1,15 @@
-# 🎨 VISAtlas — Reproduction Talk
+# VISAtlas — Reproduction Talk
 
 > A 25-slide presentation that **explains, reproduces and critically discusses** the VISAtlas paper: a system that turns a large collection of visualization images into an interactive, explorable map.
 
 **Authors:** Youssra Abouelmawahib and [teammate's name]
 **Original repository:** [github.com/yaojunhe123/VA](https://github.com/yaojunhe123/VA)
 
-📄 **[Open the slides (talk.pdf)](talk.pdf)**
+**[Open the slides (talk.pdf)](talk.pdf)**
 
 ---
 
-## 🧭 What the talk covers
+## What the talk covers
 
 | # | Section | In short |
 |---|---|---|
@@ -21,16 +21,16 @@
 | 6 | **Our reproduction** | We ran the released system ourselves, documented its weak spots, and tested it with extreme composites and minimal pairs. Our critical take. |
 | 7 | **Impact & conclusion** | From one paper to a research programme, and the take-home messages |
 
-## ✨ Highlights
+## Highlights
 
-- 🔁 **A real reproduction, not just a summary:** we ran the released VISAtlas code and tested its limits.
-- 🧠 **Real network activations:** the embedding slide shows actual ResNet50 feature maps computed with the released model weights.
-- 📈 **Citation provenance graph:** how the paper has been used by 37 follow-up works (data from Semantic Scholar).
-- 🎨 **Custom "Lumen" Beamer theme**, included in the repository.
+- **A real reproduction, not just a summary:** we ran the released VISAtlas code and tested its limits.
+- **Real network activations:** the embedding slide shows actual ResNet50 feature maps computed with the released model weights.
+- **Citation provenance graph:** how the paper has been used by 37 follow-up works (data from Semantic Scholar).
+- **Custom "Lumen" Beamer theme**, included in the repository.
 
 ---
 
-## 📁 Repository structure
+## Repository structure
 
 ```
 VA/
@@ -64,7 +64,7 @@ Files in `figures/` not listed here are earlier iterations, kept for reference.
 
 ---
 
-## 🛠️ Build the slides
+## Build the slides
 
 **Requirements:** TeX Live with `lualatex`, and the fonts Fira Sans, Fira Mono and FiraMath.
 
@@ -73,7 +73,7 @@ lualatex -interaction=nonstopmode talk.tex
 lualatex -interaction=nonstopmode talk.tex   # second run, for the page numbers
 ```
 
-## 🖼️ Regenerate the figures (optional)
+## Regenerate the figures (optional)
 
 The scripts in `figures/` crop and build the figures from local copies of the source material:
 
@@ -87,7 +87,7 @@ The paths in the scripts point to local copies: adjust them to your own machine.
 
 ---
 
-## 📚 References
+## References
 
 - **VISAtlas** — the paper being reproduced, and its [released code](https://github.com/yilinye/VisAtlas-Code).
 - **FaceNet** — F. Schroff, D. Kalenichenko, J. Philbin, *FaceNet: A Unified Embedding for Face Recognition and Clustering*, CVPR 2015.
