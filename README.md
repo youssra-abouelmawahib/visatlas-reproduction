@@ -1,90 +1,93 @@
-# VA — VISAtlas Reproduction Talk
+# 🎨 VISAtlas — Reproduction Talk
 
-LaTeX (beamer) source of the VISAtlas reproduction presentation, built with the
-custom **Lumen** beamer theme. All source is self-contained in this repository.
+> A 25-slide presentation that **explains, reproduces and critically discusses** the VISAtlas paper: a system that turns a large collection of visualization images into an interactive, explorable map.
 
-## Structure
+**Authors:** Youssra Abouelmawahib and [teammate's name]
+**Original repository:** [github.com/yaojunhe123/VA](https://github.com/yaojunhe123/VA)
+
+📄 **[Open the slides (talk.pdf)](talk.pdf)**
+
+---
+
+## 🧭 What the talk covers
+
+| # | Section | In short |
+|---|---|---|
+| 1 | **Context** | Where, when and by whom the paper was published |
+| 2 | **Motivation & research questions** | The problem VISAtlas solves, and the four questions it asks |
+| 3 | **Related work & contributions** | A citation graph of the 37 papers that cite VISAtlas, and what is new |
+| 4 | **System & method** | How images are collected, turned into embeddings with a CNN (ResNet50), trained with a triplet loss (as in FaceNet), and laid out in an interactive map. Why VISAtlas avoids PCA and t-SNE. |
+| 5 | **Evaluation** | The case studies (real-world data, comparing collections, composites and retrieval) and the user study |
+| 6 | **Our reproduction** | We ran the released system ourselves, documented its weak spots, and tested it with extreme composites and minimal pairs. Our critical take. |
+| 7 | **Impact & conclusion** | From one paper to a research programme, and the take-home messages |
+
+## ✨ Highlights
+
+- 🔁 **A real reproduction, not just a summary:** we ran the released VISAtlas code and tested its limits.
+- 🧠 **Real network activations:** the embedding slide shows actual ResNet50 feature maps computed with the released model weights.
+- 📈 **Citation provenance graph:** how the paper has been used by 37 follow-up works (data from Semantic Scholar).
+- 🎨 **Custom "Lumen" Beamer theme**, included in the repository.
+
+---
+
+## 📁 Repository structure
 
 ```
-.
-├── talk.tex                        # presentation source (7 sections, 25 frames)
-├── beamerthemelumen.sty            # Lumen theme (self-contained in repo root)
-├── beamercolorthemelumen.sty
-├── beamerfontthemelumen.sty
-├── beamerinnerthemelumen.sty
-├── beamerouterthemelumen.sty
-├── figures/
-│   ├── citation_provenance.py/.pdf # temporal citation provenance graph
-│   ├── extract_overview_parts.py   # crops for the System Overview slide
-│   ├── extract_embedding_figs.py   # crops of Fig. 2 for the embedding slides
-│   ├── extract_facenet_figs.py     # FaceNet Fig. 3 + Fig. 7 strip crops
-│   ├── extract_interface_figs.py   # Ch.5 figures: Fig. 4d / Fig. 6 / Fig. 7
-│   ├── extract_resnet_stages.py    # real ResNet50 activations (visatlas env)
-│   ├── make_resnet_stages_fig.py   # activation panel: pixels -> maps -> 11-D
-│   ├── make_collection_thumbs.py   # thumbnails for the Data Collection slide
-│   ├── embedding_fig2_trio.pdf/.png, embedding_fig2_full.pdf/.png
-│   │                               # Fig. 2: inputs -> ResNets -> embeddings
-│   ├── embedding_in_{n,m,l}.png    # the three input thumbnails (anchor/same/different)
-│   ├── facenet_fig3.pdf/.png       # anchor/positive/negative geometry (FaceNet)
-│   ├── facenet_fig7_strip.pdf/.png # one cluster row: same identity, varied looks
-│   ├── resnet_stages.png           # input -> conv1/conv3/conv5 -> GAP -> q
-│   ├── fig6_pca/tsne/legend.png    # PCA vs. t-SNE alternatives (Fig. 6)
-│   ├── fig4d.png                   # sampling + density radial overview
-│   ├── fig7_interface.png          # interface: histogram/overview/query/gallery
-│   ├── fig7_histogram.png          # Embedding Histogram panel (Fig. 7a)
-│   ├── center_*.png, left_*.png, right_*.png    # System Overview assets
-│   ├── syn_*.png, rw_beagle*.png, rw_vis30k*.png # Data Collection assets
-│   └── ...                         # earlier iterations kept for reference
-├── data/
-│   ├── citations.json              # 37 papers citing VISAtlas (Semantic Scholar)
-│   └── references.json             # reference metadata query result
-└── talk.pdf                        # built slides
+VA/
+├── talk.tex / talk.pdf        → the presentation (source + compiled slides)
+├── beamer*lumen.sty           → the custom "Lumen" theme (5 files)
+├── figures/                   → all images used in the slides
+│   ├── *.py                   → scripts that generate or crop the figures
+│   └── *.png / *.pdf          → the resulting figures
+└── data/
+    ├── citations.json         → the 37 papers citing VISAtlas
+    └── references.json        → reference metadata
 ```
 
-## Build
+<details>
+<summary><b>Details of the figure scripts</b></summary>
 
-Requires TeX Live with `lualatex`, Fira Sans / Fira Mono / FiraMath fonts.
+| Script | Produces |
+|---|---|
+| `citation_provenance.py` | Citation provenance graph over time |
+| `extract_overview_parts.py` | Crops for the *System Overview* slide |
+| `extract_embedding_figs.py` | Crops of Fig. 2 (inputs → ResNets → embeddings) |
+| `extract_facenet_figs.py` | FaceNet Fig. 3 (triplet geometry) and Fig. 7 (face-cluster strip) |
+| `extract_interface_figs.py` | Interface figures: Fig. 4(d), Fig. 6 (PCA / t-SNE), Fig. 7 |
+| `extract_resnet_stages.py` | Real ResNet50 activations (run in the `visatlas` environment) |
+| `make_resnet_stages_fig.py` | Activation panel: pixels → feature maps → embedding |
+| `make_collection_thumbs.py` | Thumbnails for the *Data Collection* slide |
+
+Files in `figures/` not listed here are earlier iterations, kept for reference.
+
+</details>
+
+---
+
+## 🛠️ Build the slides
+
+**Requirements:** TeX Live with `lualatex`, and the fonts Fira Sans, Fira Mono and FiraMath.
 
 ```bash
 lualatex -interaction=nonstopmode talk.tex
-lualatex -interaction=nonstopmode talk.tex   # second run for page totals
+lualatex -interaction=nonstopmode talk.tex   # second run, for the page numbers
 ```
 
-## Asset generation
+## 🖼️ Regenerate the figures (optional)
 
-Sources used for the figure crops:
+The scripts in `figures/` crop and build the figures from local copies of the source material:
 
-- VISAtlas paper PDF — Fig. 1 (System Overview), Fig. 10 (real-world
-  thumbnails), and Fig. 2 (Image Embedding via CNN: inputs, ResNets,
-  embeddings, triplet loss).
-- FaceNet paper PDF (Schroff et al., CVPR 2015, arXiv:1503.03832) — Fig. 3
-  (triplet geometry) and Fig. 7 (face-cluster strip); `extract_facenet_figs.py`
-  expects a local copy at `/tmp/opencode/facenet.pdf`.
-- VISAtlas interface figures (Chapter 5 slides): `extract_interface_figs.py`
-  crops Fig. 4(d), Fig. 6 (PCA/t-SNE/legend) and Fig. 7 from the paper PDF.
-- Real ResNet50 activations for the embedding slide: run
-  `extract_resnet_stages.py` inside the `visatlas` conda env (loads the
-  released 11250.h5 + forvis2.h5 weights, uses `Crawled data/point/506.png`),
-  then `make_resnet_stages_fig.py` with the system python.
-- Released VISAtlas repository (`github.com/yilinye/VisAtlas-Code`):
-  `Frontend/src/assets/static/{data2vis_imdb,imdb_Beagle,imdb_vis30k}` and
-  `Backend/uploadImage` — representative collection and demo images.
+- **VISAtlas paper (PDF):** Fig. 1 (system overview), Fig. 2 (image embedding via CNN), Fig. 4(d), 6, 7 (interface) and Fig. 10 (real-world thumbnails).
+- **FaceNet paper** (Schroff et al., CVPR 2015, [arXiv:1503.03832](https://arxiv.org/abs/1503.03832)): Fig. 3 and Fig. 7. The script expects a local copy at `/tmp/opencode/facenet.pdf`.
+- **Released VISAtlas code** ([github.com/yilinye/VisAtlas-Code](https://github.com/yilinye/VisAtlas-Code)): the demo and collection images, and the model weights (`11250.h5`, `forvis2.h5`).
+  1. Run `extract_resnet_stages.py` inside the `visatlas` conda environment.
+  2. Then run `make_resnet_stages_fig.py` with your normal Python.
 
-Scripts in `figures/` regenerate the crops (paths point to the local copies of
-the paper and repository).
+The paths in the scripts point to local copies: adjust them to your own machine.
 
-## Deck outline
+---
 
-1. **Context** — Where, When, and by Whom
-2. **Motivation & Research Questions** — paper quotes + claim; the four questions
-3. **Related Work & Contributions** — citation provenance graph; contributions
-4. **System & Method** — System Overview; Data Collection; Image Embedding via
-   CNN (real ResNet50 activations); FaceNet triplet geometry -> VISAtlas
-   objective; Why VISAtlas Avoids PCA and t-SNE (three-column comparison);
-   How VISAtlas Builds an Interactive Embedding Space (central Fig. 4(d) hub)
-5. **Evaluation: Case Studies** — Does real-world data help?; comparing
-   collections; composites and retrieval; user study
-6. **Our Reproduction & Discussion** — we ran the released system; documented
-   weak spots; extreme 4-way composite; minimal-pair test; our critical take
-7. **Impact & Conclusion** — from one paper to a research programme;
-   take-home messages
+## 📚 References
+
+- **VISAtlas** — the paper being reproduced, and its [released code](https://github.com/yilinye/VisAtlas-Code).
+- **FaceNet** — F. Schroff, D. Kalenichenko, J. Philbin, *FaceNet: A Unified Embedding for Face Recognition and Clustering*, CVPR 2015.
