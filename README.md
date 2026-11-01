@@ -2,7 +2,7 @@
 
 > A 25-slide presentation that **explains, reproduces and critically discusses** the VISAtlas paper: a system that turns a large collection of visualization images into an interactive, explorable map.
 
-**Authors:** Youssra Abouelmawahib and [Yao Junhe]
+**Authors:** Youssra Abouelmawahib and Yao Junhe
 **Original repository:** [github.com/yaojunhe123/VA](https://github.com/yaojunhe123/VA)
 
 **[Open the slides (talk.pdf)](talk.pdf)**
